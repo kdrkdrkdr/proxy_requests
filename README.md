@@ -16,10 +16,8 @@
 import proxy_requests
 proxy_requests.SNI_DNS_SERVER_ADDRESS = '1.1.1.1'
 sni = proxy_requests.SniRequests()
-html = s.get('https://manamoa.net').text # 마나모아 사이트는 Cloudflare 서비스를 사용함
+html = sni.get('https://manamoa.net').text # 마나모아 사이트는 Cloudflare 서비스를 사용함
 ```
-
-
 
 
 ### TorRequests Example
@@ -31,6 +29,10 @@ import proxy_requests
 tor = proxy_requests.TorRequests()
 html = tor.get('https://check.torproject.org/').text
 ```
+
+
+## 사용법 영상
+https://blog.naver.com/powerapollon/221791573044
 
 
 ## 스타좀 눌러줍쇼..
