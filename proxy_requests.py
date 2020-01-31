@@ -1,5 +1,7 @@
 #-*- coding:utf-8 -*-
 
+# Author : KDR (https://github.com/kdrkdrkdr)
+
 import sys
 import os
 import requests
