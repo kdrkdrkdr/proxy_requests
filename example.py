@@ -10,8 +10,7 @@ except:
     
 
 import proxy_requests
-proxy_requests.SNI_DNS_SERVER_ADDRESS = '1.1.1.1'
-sni = proxy_requests.SniRequests()
+sni = proxy_requests.SniRequests('hiyobi.me', '1.1.1.1')
 req2 = sni.get('https://hiyobi.me')
 print('SniRequests : ', req2)
 

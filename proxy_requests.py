@@ -10,7 +10,6 @@ import psutil
 import urllib
 
 
-SNI_DNS_SERVER_ADDRESS = ""
 
 class TorRequests(object):
     """
@@ -72,9 +71,9 @@ class SniRequests(object):
 This class makes web reqeusts by bypass the SNI block.
     """
 
-    def __init__(self):
+    def __init__(self, HostURL, DNSADDR):
         self.sni_session = requests.Session()
-        self._Enable_SNI_Adapter = _Enable_SNI_Adapter()
+        self._Enable_SNI_Adapter = _Enable_SNI_Adapter(HostURL, DNSADDR)
         self.sni_session.mount('https://', self._Enable_SNI_Adapter)
 
 
@@ -106,11 +105,16 @@ This class makes web reqeusts by bypass the SNI block.
 
 class _Enable_SNI_Adapter(requests.adapters.HTTPAdapter):
 
+    def __init__(self, HostURL, SNI_DNS_SERVER_ADDRESS):
+        requests.adapters.HTTPAdapter.__init__(self)
+        self.hostURL = HostURL
+        self.SNI_DNS_SERVER_ADDRESS = SNI_DNS_SERVER_ADDRESS
+
     def send(self, request, **kwargs):
         try:
             connection_pool_kwargs = self.poolmanager.connection_pool_kw
             result = urllib.parse.urlparse(request.url)
-            DNSADDR = SNI_DNS_SERVER_ADDRESS
+            DNSADDR = self.SNI_DNS_SERVER_ADDRESS
             
             if result.scheme == 'https' and DNSADDR:
                 request.url = request.url.replace(
@@ -137,3 +141,4 @@ class _Enable_SNI_Adapter(requests.adapters.HTTPAdapter):
                 "\n|2. Did you enter the address of the website correctly? |"
                 "\n+-------------------------------------------------------+\n"
             )
+
