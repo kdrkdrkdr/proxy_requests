@@ -14,9 +14,8 @@
 
 ```python
 import proxy_requests
-proxy_requests.SNI_DNS_SERVER_ADDRESS = '1.1.1.1'
-sni = proxy_requests.SniRequests()
-html = sni.get('https://manamoa.net').text # 마나모아 사이트는 Cloudflare 서비스를 사용함
+sni = proxy_requests.SniRequests('hiyobi.me', '1.1.1.1')
+html = sni.get('https://hiyobi.me').text # hiyobi.me 사이트는 Cloudflare 서비스를 사용함
 ```
 
 
@@ -31,8 +30,8 @@ html = tor.get('https://check.torproject.org/').text
 ```
 
 
-## 사용법 영상
-https://blog.naver.com/powerapollon/221791573044
+## 사용법 (업데이트)
+https://blog.naver.com/powerapollon/221845443146
 
 
 ## 스타좀 눌러줍쇼..
