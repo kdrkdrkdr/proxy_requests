@@ -6,7 +6,6 @@ import sys
 import os
 import requests
 import subprocess
-import psutil
 import urllib
 
 
@@ -29,16 +28,8 @@ This class makes web requests with Tor Proxy.
 
 
     def _tor_is_alive(self):
-        self.proc_list = [proc.name() for proc in psutil.process_iter()]
-        
-        if os.name == 'nt':
-            if 'tor.exe' in self.proc_list:
-                return True
-            else:
-                subprocess.Popen(['./TorService/tor.exe'])
-
-        else:
-            sys.exit("This module does not support Linux yet.")
+        os.system('taskkill /f /im tor.exe')
+        subprocess.Popen(['./TorService/tor.exe'])
 
 
     def get(self, *args, **kwargs):
